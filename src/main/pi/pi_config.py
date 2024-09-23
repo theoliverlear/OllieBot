@@ -13,11 +13,19 @@ class PiConfig:
     def __init__(self, pi_pins: PiPins):
         self.pi_pins = pi_pins
 
+    def add_and_overwrite_pins(self, *pi_pins: PiPin) -> None:
+        for pin in pi_pins:
+            self.pi_pins.set_pin(pin)
+
     @staticmethod
     def create_from_compatible_configs(*pi_configs: 'PiConfig') -> 'PiConfig':
-        for pi_config in pi_configs:
-            pass
-        pass
+        pi_pins: PiPins = PiPins([])
+        pi_config: PiConfig = PiConfig(pi_pins)
+        for config in pi_configs:
+            pi_config.add_and_overwrite_pins(*config.pi_pins.pins)
+        return pi_config
+
+
 
     @staticmethod
     def create_from_defaults() -> 'PiConfig':
