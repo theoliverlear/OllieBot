@@ -1,6 +1,5 @@
 from src.main.pi.pi_config import PiConfig
 from src.main.pi.pi_controller import PiController
-from src.main.robot.component.wheel.wheel_set import WheelSet
 
 
 class Robot:
