@@ -5,10 +5,10 @@ from src.main.pi.pi_pins import PiPins
 
 
 class PiConfig:
-    LIGHT_CONFIG: 'PiConfig'
-    MOTOR_CONFIG: 'PiConfig'
-    SOUND_CONFIG: 'PiConfig'
-    CAMERA_CONFIG: 'PiConfig'
+    LIGHT_CONFIG: 'PiConfig' = None
+    MOTOR_CONFIG: 'PiConfig' = None
+    SOUND_CONFIG: 'PiConfig' = None
+    CAMERA_CONFIG: 'PiConfig' = None
     DEFAULT_CONFIGS: List['PiConfig'] = [LIGHT_CONFIG, MOTOR_CONFIG, SOUND_CONFIG, CAMERA_CONFIG]
     def __init__(self, pi_pins: PiPins):
         self.pi_pins = pi_pins
