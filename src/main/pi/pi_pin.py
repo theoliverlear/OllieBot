@@ -1,3 +1,5 @@
+from RPi import GPIO
+
 from src.main.pi.pin_state import PinState
 
 
@@ -5,6 +7,8 @@ class PiPin:
     def __init__(self, pin_number: int, pin_state: PinState = PinState.DISABLED):
         self._pin_number = pin_number
         self.pin_state = pin_state
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(self.pin_number, GPIO.OUT)
 
     @property
     def pin_number(self):
