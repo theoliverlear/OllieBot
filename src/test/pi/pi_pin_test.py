@@ -1,7 +1,8 @@
 import unittest
+from time import sleep
 
-from src.main.pi.pi_pin import PiPin
-from src.main.pi.pin_state import PinState
+from main.pi.pi_pin import PiPin
+from main.pi.pin_state import PinState
 
 
 class PiPinTest(unittest.TestCase):
@@ -11,5 +12,11 @@ class PiPinTest(unittest.TestCase):
         pin_expected_state: PinState = PinState.DISABLED
         self.assertEqual(pi_pin.pin_state, pin_expected_state)
 
+    def test_real_pin_state(self):
+        pi_pin = PiPin(17)
+        pi_pin.set_state(PinState.ENABLED)
+        sleep(1)
+        pi_pin.set_state(PinState.DISABLED)
+        self.assertTrue(True)
 if __name__ == '__main__':
     unittest.main()
