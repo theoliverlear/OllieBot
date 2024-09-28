@@ -2,6 +2,7 @@ from typing import List
 
 from src.main.pi.pi_pin import PiPin
 from src.main.pi.pi_pins import PiPins
+from src.main.pi.pin_state import PinState
 
 
 class PiConfig:
@@ -15,16 +16,22 @@ class PiConfig:
 
     def add_and_overwrite_pins(self, *pi_pins: PiPin) -> None:
         for pin in pi_pins:
-            self.pi_pins.set_pin(pin)
+            self.pi_pins.hard_set_pin(pin)
 
     @staticmethod
     def create_from_compatible_configs(*pi_configs: 'PiConfig') -> 'PiConfig':
-        pi_pins: PiPins = PiPins([])
-        pi_config: PiConfig = PiConfig(pi_pins)
+        pi_config: PiConfig = PiConfig.create_empty_config()
         for config in pi_configs:
-            pi_config.add_and_overwrite_pins(*config.pi_pins.pins)
+            if config is not None:
+                pi_config.add_and_overwrite_pins(*config.pi_pins.pins)
         return pi_config
 
+    @staticmethod
+    def create_empty_config() -> 'PiConfig':
+        pi_config: PiConfig = PiConfig(PiPins([]))
+        for i in PiPins.GPIO_PINS:
+            pi_config.pi_pins.hard_set_pin(PiPin(i, PinState.DISABLED))
+        return pi_config
 
 
     @staticmethod
