@@ -1,7 +1,5 @@
 from src.main.pi.pi_config import PiConfig
-from src.main.pi.pi_pin import PiPin
 from src.main.pi.pi_pins import PiPins
-from src.main.robot.robot import Robot
 
 
 class PiController:
