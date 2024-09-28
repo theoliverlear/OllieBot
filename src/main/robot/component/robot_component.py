@@ -11,8 +11,8 @@ class RobotComponent(OutputDevice):
 
     def on(self):
         self.pi_pin.set_state(PinState.ENABLED)
-        self.on()
+        super().on()
 
     def off(self):
         self.pi_pin.set_state(PinState.DISABLED)
-        self.off()
+        super().off()
